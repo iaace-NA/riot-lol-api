@@ -17,7 +17,7 @@ npm install --save riot-lol-api
 ```js
 var RiotRequest = require('riot-lol-api');
 
-var riotRequest = new RiotRequest('my_api_key');
+var riotRequest = new RiotRequest('my_api_key', timeout_in_ms, cache);//cache optional
 
 // 'summoner' is a string to identify the method being used currently
 // See note about rate-limiting in the README.
@@ -77,7 +77,7 @@ A list of all the buckets is available in https://developer.riotgames.com/rate-l
 
 If the above paragraph didn't make any sense, go and check out the official Riot link above and then come back to this section ;)
 
-Here is a sample code excerpt: 
+Here is a sample code excerpt:
 
 ```js
 riotRequest.request('euw1', 'summoner', '/lol/summoner/v3/summoners/by-name/graphistos', function(err, data) {});
@@ -111,7 +111,7 @@ Honestly, skip this section if you're using the library for the first time. I st
 Use case:
 
 * throttle some process to ensure other processes always have enough requests available.
- 
+
 Let's say you have a worker downloading games in the background, and you also have a frontend that can request games from the API in realtime to answer user requests. You always want the frontend to be able to request in realtime, but by default it's very likely your worker will use all capacity every 10s.
 To prevent this, the library exposes a method named `setThrottle(platform, method, throttle)` (and `setThrottle(method, throttle)` which is automatically applied to all platforms).
 
